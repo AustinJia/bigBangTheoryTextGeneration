@@ -4,7 +4,6 @@ colab with edit promision:
 https://colab.research.google.com/drive/1EHPSoLq1u_1eD2dmO5eIpH1SnC2zdADm
 
 data.pkl stores the dictionary: mapping from series_number to content
-{'series-1-episode-1' : 
 
 ```
 dict = {
