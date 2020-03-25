@@ -51,7 +51,7 @@ def token_lookup():
     """
 
     token_dict = {}
-    dict_token[':'] = '||COLON||'
+    token_dict[':'] = '||COLON||'
     token_dict[','] = '||COMMA||'
     token_dict['-'] = '||DASH||'
     token_dict['!'] = '||EXCLAMATION_MARK||'
@@ -62,16 +62,16 @@ def token_lookup():
     token_dict['('] = '||LEFT_PARENTHESIS||'
     token_dict[')'] = '||RIGHT_PARENTHESIS||'
 
-    return dict_token
+    return token_dict
 
 
-def preprocess_and_save_data(dataset_path):
+def preprocess_and_save_data(dataset_path='data.pkl'):
     """
     Preprocess Text Data
     """
     data_dict = load_data(dataset_path)
     token_dict = token_lookup()
-    vocab_to_int, int_to_vocab = create_lookup_tables(text, token_dict)
+    vocab_to_int, int_to_vocab = create_lookup_tables(data_dict, token_dict)
     pickle.dump((vocab_to_int, int_to_vocab, token_dict), open('preprocess.pkl', 'wb'))
 
 
