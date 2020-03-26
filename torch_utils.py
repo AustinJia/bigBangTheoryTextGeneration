@@ -2,6 +2,7 @@ import torch
 from torch.utils.data import TensorDataset, DataLoader
 import numpy as np
 import torch.nn as nn
+import helper
 
 def batch_data(words, sequence_length, batch_size):
     """
