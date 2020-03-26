@@ -23,3 +23,5 @@ print(dict.keys())# to see all the keys
 Code based on following repositories:
 - https://codeburst.io/web-scraping-101-with-python-beautiful-soup-bb617be1f486
 - https://github.com/udacity/deep-learning/tree/master/tv-script-generation
+- https://github.com/udacity/deep-learning-v2-pytorch/tree/master/project-tv-script-generation
+- https://github.com/koushik-elite/TV-Script-Generation
