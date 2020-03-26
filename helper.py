@@ -1,6 +1,8 @@
 import os
 import pickle
 
+SPECIAL_WORDS = {'PADDING': '<PAD>'}
+
 def load_data(path='data.pkl'):
     """
     Load Dataset from File
@@ -12,36 +14,36 @@ def load_data(path='data.pkl'):
     return data_dict
 
 
-def create_lookup_tables(data_dict, token_dict={}):
-    """
-    Create lookup tables for vocabulary
-    :param text: The text of tv scripts split into words
-    :return: A tuple of dicts (vocab_to_int, int_to_vocab)
-    """
-
-    vocab = set()
-    vocab_to_int, int_to_vocab = {}, {}
-
-    # get all unique words in dataset
-    for episode in data_dict:
-        for line in data_dict[episode]:
-
-            line = line.lower()
-
-            # replace punctuations with special tokens
-            for key, token in token_dict.items():
-                text = line.replace(key, ' {} '.format(token))
-
-
-            for word in line.split():
-                vocab.add(word.strip())
-
-    # create dicts
-    for i, word in enumerate(vocab):
-        vocab_to_int[word] = i
-        int_to_vocab[i] = word
-
-    return vocab_to_int, int_to_vocab
+# def create_lookup_tables(data_dict, token_dict={}):
+#     """
+#     Create lookup tables for vocabulary
+#     :param text: The text of tv scripts split into words
+#     :return: A tuple of dicts (vocab_to_int, int_to_vocab)
+#     """
+#
+#     vocab = set()
+#     vocab_to_int, int_to_vocab = {}, {}
+#
+#     # get all unique words in dataset
+#     for episode in data_dict:
+#         for line in data_dict[episode]:
+#
+#             line = line.lower()
+#
+#             # replace punctuations with special tokens
+#             for key, token in token_dict.items():
+#                 text = line.replace(key, ' {} '.format(token))
+#
+#
+#             for word in line.split():
+#                 vocab.add(word.strip())
+#
+#     # create dicts
+#     for i, word in enumerate(vocab):
+#         vocab_to_int[word] = i
+#         int_to_vocab[i] = word
+#
+#     return vocab_to_int, int_to_vocab
 
 
 def token_lookup():
@@ -71,8 +73,39 @@ def preprocess_and_save_data(dataset_path='data.pkl'):
     """
     data_dict = load_data(dataset_path)
     token_dict = token_lookup()
-    vocab_to_int, int_to_vocab = create_lookup_tables(data_dict, token_dict)
-    pickle.dump((vocab_to_int, int_to_vocab, token_dict), open('preprocess.pkl', 'wb'))
+
+    vocab = set()
+    vocab_to_int, int_to_vocab = {}, {}
+    all_text = []
+
+    # get all unique words in dataset
+    for episode in data_dict:
+        for line in data_dict[episode]:
+            line = line.lower()
+
+            # replace punctuations with special tokens
+            for key, token in token_dict.items():
+                line = line.replace(key, ' {} '.format(token))
+
+            # add word to vocab and all text variable
+            for word in line.split():
+                word = word.strip()
+                vocab.add(word)
+                all_text.append(word)
+
+    # add special words to vocab
+    for special_word in SPECIAL_WORDS.values():
+        vocab.add(special_word)
+
+    # create lookup tables
+    for i, word in enumerate(vocab):
+        vocab_to_int[word] = i
+        int_to_vocab[i] = word
+
+    # create int representation of all text
+    int_text = [vocab_to_int[word] for word in all_text]
+
+    pickle.dump((int_text, vocab_to_int, int_to_vocab, token_dict), open('preprocess.pkl', 'wb'))
 
 
 def load_preprocess():
@@ -94,3 +127,6 @@ def load_params():
     Load parameters from file
     """
     return pickle.load(open('params.p', mode='rb'))
+
+
+# preprocess_and_save_data()
