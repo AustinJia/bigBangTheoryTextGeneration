@@ -67,7 +67,7 @@ def generate(rnn, prime_id, int_to_vocab, token_dict, pad_value, predict_len=100
     # Replace punctuation tokens
     for key, token in token_dict.items():
         ending = ' ' if key in ['\n', '(', '"'] else ''
-        gen_sentences = gen_sentences.replace(' ' + token.lower(), key)
+        gen_sentences = gen_sentences.replace(' ' + token, key)
     gen_sentences = gen_sentences.replace('\n ', '\n')
     gen_sentences = gen_sentences.replace('( ', '(')
 
