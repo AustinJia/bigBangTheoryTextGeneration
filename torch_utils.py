@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import TensorDataset, DataLoader
 import numpy as np
 import torch.nn as nn
-
+import helper
 def batch_data(words, sequence_length, batch_size):
     """
     Batch the neural network data using DataLoader
@@ -93,7 +93,7 @@ def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, train_loader, sho
                     previousLoss = average_loss
                 if average_loss <= minLoss:
                     minLoss = average_loss
-                    helper.save_model('./save/trained_rnn', rnn)
+                    helper.save_model('./save/trained_rnn_new', rnn)
                     print('Model Trained and Saved')
                 batch_losses = []
 
