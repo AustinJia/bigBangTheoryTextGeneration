@@ -1,5 +1,6 @@
 import os
 import pickle
+import torch 
 
 SPECIAL_WORDS = {'PADDING': '<PAD>'}
 
@@ -128,5 +129,11 @@ def load_params():
     """
     return pickle.load(open('params.p', mode='rb'))
 
-
+def save_model(filename, decoder):
+    save_filename = os.path.splitext(os.path.basename(filename))[0] + '.pt'
+    torch.save(decoder, save_filename)
+    
 # preprocess_and_save_data()
+def load_model(filename):
+    save_filename = os.path.splitext(os.path.basename(filename))[0] + '.pt'
+    return torch.load(save_filename)
