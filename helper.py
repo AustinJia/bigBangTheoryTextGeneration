@@ -132,8 +132,9 @@ def load_params():
 def save_model(filename, decoder):
     save_filename = os.path.splitext(os.path.basename(filename))[0] + '.pt'
     torch.save(decoder, save_filename)
-    
-# preprocess_and_save_data()
+
 def load_model(filename):
+    # assume use cpu to generate text
+    device = torch.device('cpu')
     save_filename = os.path.splitext(os.path.basename(filename))[0] + '.pt'
-    return torch.load(save_filename)
+    return torch.load(save_filename,map_location=device)
