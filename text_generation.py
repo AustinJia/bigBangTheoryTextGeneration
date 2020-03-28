@@ -3,6 +3,7 @@ import helper
 import problem_unittests as tests
 import torch.nn.functional as F
 import time
+import datetime
 
 _, vocab_to_int, int_to_vocab, token_dict = helper.load_preprocess()
 trained_rnn = helper.load_model('./save/trained_rnn')
@@ -79,12 +80,12 @@ def generate(rnn, prime_id, int_to_vocab, token_dict, pad_value, predict_len=100
 
 # run the cell multiple times to get different results!
 gen_length = 400
-prime_word = 'jerry' # name for starting the script
+prime_word = 'magically' # name for starting the script
 pad_word = helper.SPECIAL_WORDS['PADDING']
 generated_script = generate(trained_rnn, vocab_to_int[prime_word + ':'], int_to_vocab, token_dict, vocab_to_int[pad_word], gen_length)
 print(generated_script)
 
 
-f =  open("generated_script" + time.now() + ".txt","w")
+f =  open("generated_script" + str(datetime.datetime.now())+ ".txt","w")
 f.write(generated_script)
 f.close()

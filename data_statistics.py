@@ -14,7 +14,7 @@ import helper
 
 
 
-if __name__ = "__main__":
+if __name__ == "__main__":
 
     data_dict = helper.load_data("data.pkl")
     token_dict = token_lookup()
