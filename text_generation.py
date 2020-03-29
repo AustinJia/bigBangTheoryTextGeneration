@@ -5,7 +5,7 @@ import time
 import datetime
 
 _, vocab_to_int, int_to_vocab, token_dict = helper.load_preprocess()
-trained_rnn = helper.load_model('./save/trained_rnn')
+trained_rnn = helper.load_model('./save/trained_lstm')
 
 
 def generate(rnn, prime_id, int_to_vocab, token_dict, pad_value, predict_len=100):
