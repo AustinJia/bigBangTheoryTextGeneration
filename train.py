@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch_utils import batch_data, train_rnn
-from models import RNN, Vanilla
+from models import RNN, Vanilla, GRU
 import matplotlib.pyplot as plt
 
 # hyperparameters
@@ -29,7 +29,7 @@ if not train_on_gpu:
     print('No GPU found. Please use a GPU to train your neural network.')
 
 # create model and move to gpu if available
-rnn = RNN(vocab_size, output_size, embedding_dim, hidden_dim, n_layers, dropout=0.25)
+rnn = GRU(vocab_size, output_size, embedding_dim, hidden_dim, n_layers, dropout=0.25)
 if train_on_gpu:
     rnn.cuda()
 
