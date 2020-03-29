@@ -182,10 +182,12 @@ class Vanilla(nn.Module):
         :param batch_size: The batch_size of the hidden state
         :return: hidden state of dims (n_layers, batch_size, hidden_dim)
         '''
+        if (torch.cuda.is_available()):
+            hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_dim).cuda())
+        else:
+            hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_dim))
 
-        return Variable(torch.zeros(self.n_layers, batch_size, self.hidden_dim))
-
-
+        return hidden
 
 
 
@@ -262,5 +264,9 @@ class GRU(nn.Module):
         :param batch_size: The batch_size of the hidden state
         :return: hidden state of dims (n_layers, batch_size, hidden_dim)
         '''
+        if (torch.cuda.is_available()):
+            hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_dim).cuda())
+        else:
+            hidden = Variable(torch.zeros(self.n_layers, batch_size, self.hidden_dim))
 
-        return Variable(torch.zeros(self.n_layers, batch_size, self.hidden_dim))
+        return hidden
