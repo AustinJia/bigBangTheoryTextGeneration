@@ -1,6 +1,7 @@
 import os
 import pickle
 import torch 
+import re
 
 SPECIAL_WORDS = {'PADDING': '<PAD>'}
 
@@ -108,6 +109,37 @@ def preprocess_and_save_data(dataset_path='data.pkl'):
 
     pickle.dump((int_text, vocab_to_int, int_to_vocab, token_dict), open('preprocess.pkl', 'wb'))
 
+def preprocess_words2vector( dataset_path='data.pkl'):
+    # Function to convert a raw review to a string of words
+    # The input is a single string (a raw movie review), and 
+    # the output is a single string (a preprocessed movie review)
+    #
+    data_dict = load_data(dataset_path)
+    clean_texts = []
+
+
+    # get all unique words in dataset
+    for episode in data_dict:
+        for review_text in data_dict[episode]:
+            # 2. Remove non-letters        
+            letters_only = re.sub("[^a-zA-Z]", " ", review_text)
+            #
+            # 3. Convert to lower case, split into individual words
+            words = letters_only.lower().split() 
+            # print("words：",words)                       
+            # 4. In Python, searching a set is much faster than searching
+            #   a list, so convert the stop words to a set
+            # stops = set(stopwords.words("english"))                  
+            # 
+            # 5. Remove stop words
+            # meaningful_words = [w for w in words if not w in words]   
+            #
+            # print("meaningful_words："，meaningful_words)
+            # 6. Join the words back into one string separated by space, 
+            # and return the result.
+            meaningful_words = [w for w in words if len(w) > 1]  
+            clean_texts.append(meaningful_words)
+    return clean_texts 
 
 def load_preprocess():
     """
