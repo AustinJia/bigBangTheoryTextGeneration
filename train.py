@@ -29,7 +29,8 @@ if not train_on_gpu:
     print('No GPU found. Please use a GPU to train your neural network.')
 
 # create model and move to gpu if available
-rnn = GRU(vocab_size, output_size, embedding_dim, hidden_dim, n_layers, dropout=0.25)
+# rnn = GRU(vocab_size, output_size, embedding_dim, hidden_dim, n_layers, dropout=0.25)
+rnn = Vanilla(vocab_size, output_size, embedding_dim, hidden_dim, n_layers, dropout=0.5)
 if train_on_gpu:
     rnn.cuda()
 
@@ -40,7 +41,8 @@ optimizer = torch.optim.Adam(rnn.parameters(), lr=learning_rate)
 criterion = nn.CrossEntropyLoss()
 
 # train the model
-trained_rnn, loss_history = train_rnn(rnn, batch_size, optimizer, criterion, num_epochs, train_loader, show_every_n_batches)
+saved_model_name = 'trained_rnn'
+trained_rnn, loss_history = train_rnn(rnn, batch_size, optimizer, criterion, num_epochs, train_loader, show_every_n_batches, saved_model_name)
 
 plt.plot(loss_history)
 plt.xlabel('Iteration')
