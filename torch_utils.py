@@ -64,6 +64,7 @@ def forward_back_prop(rnn, optimizer, criterion, inputs, labels, hidden_dim, cli
 
 def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, train_loader, show_every_n_batches=100):
     batch_losses = []
+    loss_history = []
 
     rnn.train()
 
@@ -90,13 +91,14 @@ def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, train_loader, sho
             if batch_i % show_every_n_batches == 0:
                 average_loss = np.average(batch_losses)
                 print('Epoch: {:>4}/{:<4}  Loss: {} Decrease Rate: {} \n'.format(epoch_i, n_epochs, average_loss, (previousLoss - average_loss)))
+                loss_history.append(average_loss)
                 if average_loss <= previousLoss:
                     previousLoss = average_loss
                 if average_loss <= minLoss:
                     minLoss = average_loss
-                    helper.save_model('./save/trained_rnn_new', rnn)
+                    helper.save_model('./save/trained_lstm', rnn)
                     print('Model Trained and Saved')
                 batch_losses = []
 
     # returns a trained rnn
-    return rnn
+    return rnn, loss_history

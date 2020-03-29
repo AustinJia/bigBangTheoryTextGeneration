@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 from torch_utils import batch_data, train_rnn
 from models import RNN
+import matplotlib.pyplot as plt
 
 # hyperparameters
 sequence_length = 6
@@ -39,4 +40,10 @@ optimizer = torch.optim.Adam(rnn.parameters(), lr=learning_rate)
 criterion = nn.CrossEntropyLoss()
 
 # train the model
-trained_rnn = train_rnn(rnn, batch_size, optimizer, criterion, num_epochs, train_loader, show_every_n_batches)
+trained_rnn, loss_history = train_rnn(rnn, batch_size, optimizer, criterion, num_epochs, train_loader, show_every_n_batches)
+
+plt.plot(loss_history)
+plt.xlabel('Iteration')
+plt.ylabel('Loss')
+plt.title('Training loss history')
+plt.show()
