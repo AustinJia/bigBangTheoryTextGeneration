@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from torch_utils import batch_data, train_rnn
-from models import RNN
+from models import RNN, Vanilla
 import matplotlib.pyplot as plt
 
 # hyperparameters

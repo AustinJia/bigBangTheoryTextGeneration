@@ -24,7 +24,7 @@ def batch_data(words, sequence_length, batch_size):
 
 
 
-def forward_back_prop(rnn, optimizer, criterion, inputs, labels, hidden_dim, clip=9):
+def forward_back_prop(rnn, optimizer, criterion, inputs, labels, hidden_dim, type="lstm", clip=9):
     """
     Forward and backward propagation on the neural network
     :param decoder: The PyTorch Module that holds the neural network
@@ -37,8 +37,10 @@ def forward_back_prop(rnn, optimizer, criterion, inputs, labels, hidden_dim, cli
     if(torch.cuda.is_available()):
         inputs, labels = inputs.cuda(), labels.cuda()
 
-    #hidden = repackage_hidden(hidden)
-    hidden = tuple([each.data for each in hidden_dim])
+    if type is "vanilla":
+        hidden = hidden_dim.data
+    else:
+        hidden = tuple([each.data for each in hidden_dim])
 
     rnn.zero_grad()
     optimizer.zero_grad()
@@ -66,6 +68,11 @@ def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, train_loader, sho
     batch_losses = []
     loss_history = []
 
+    if isinstance(rnn.lstm, nn.RNN) or isinstance(rnn.lstm, nn.GRU):
+        type = "vanilla"
+    elif isinstance(rnn.lstm, nn.LSTM):
+        type = "lstm"
+
     rnn.train()
 
     previousLoss = np.Inf
@@ -84,7 +91,7 @@ def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, train_loader, sho
                 break
 
             # forward, back prop
-            loss, hidden = forward_back_prop(rnn, optimizer, criterion, inputs, labels, hidden, clip=5)
+            loss, hidden = forward_back_prop(rnn, optimizer, criterion, inputs, labels, hidden, type, clip=5)
             batch_losses.append(loss)
 
             # printing loss stats
