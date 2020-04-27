@@ -1,26 +1,28 @@
 
 ## Text Generation for The Big Bang Theory (TBBT)
 This is a course project for CSE 6240: Web Search and Text Mining, Spring 2020
-Authors: Raghav Raj Mittal, Austin Jiang, Satwik Mekala
+
+###### Authors: Raghav Raj Mittal, Austin Jiang, Satwik Mekala
 [link to Our Github](https://github.com/AustinJia/bigBangTheoryTextGeneration).
 
-1. Scrapping code in colab (recommend) with edit permission.[link to scrapping_tools.ipynb!](https://colab.research.google.com/drive/1EHPSoLq1u_1eD2dmO5eIpH1SnC2zdADm)
-Or
-You can run scrapping_tools.py
+1.	Scrapping code in colab (recommend) with edit permission. [Link to scrapping_tools.ipynb!](https://colab.research.google.com/drive/1EHPSoLq1u_1eD2dmO5eIpH1SnC2zdADm)
 
-2. Model generator code in colab with edit permission. [link to model_generator.ipynb!](https://colab.research.google.com/drive/1PJJt6lzVxeGxMv4brBLiElOTP62ILQ8K)
+	Or You can run scrapping_tools.py
 
-Before the running make sure 
+2.	Model generator code in colab with edit permission. [Link to model_generator.ipynb!](https://colab.research.google.com/drive/1PJJt6lzVxeGxMv4brBLiElOTP62ILQ8K)
+
+	Before the running make sure 
 - Make sure select GPU type in colab (Runting->Change Run Type -> GPU)
 - Make sure upload following files (models.py torch_utils.py helper.py preprocess.pkl)
 
-3. Text generator code in colab with edit permission [link to text_generator.ipynb!](https://colab.research.google.com/drive/1GrpRP17WUOQlW9WbBuRN0izqqPhd2iYY)
+3.	Text generator code in colab with edit permission. [Link to text_generator.ipynb!](https://colab.research.google.com/drive/1GrpRP17WUOQlW9WbBuRN0izqqPhd2iYY)
 
-Before the running make sure 
+	Before the running make sure 
 - Make sure select CPU type in colab (Runting->Change Run Type -> None)
 - Make sure upload following file before run, helper.py preprocess.pkl models.py data.pkl trained_GRU_sq_3.pt(this file could be different , and also change "model_name") 
 
 4. Code expalining
+
 | Code  | Definition |
 | ------------- | ------------- |
 | scrapping_tools.ipynb  |  scrapping code to get TBBT data |
@@ -29,8 +31,8 @@ Before the running make sure
 | word2vecTrainModels.py  | word2vec training model  |
 
 
-5. data.pkl: stores the raw data
-In data.pkl stores the dictionary: mapping from series_number to content
+5.	data.pkl,
+	stores the dictionary: mapping from series_number to content
 
 ```
 dict = {
