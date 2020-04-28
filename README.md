@@ -7,7 +7,7 @@ This is a course project for CSE 6240: Web Search and Text Mining, Spring 2020
 
 1.	Scrapping code in colab (recommend) with edit permission. [Link to scrapping_tools.ipynb!](https://colab.research.google.com/drive/1EHPSoLq1u_1eD2dmO5eIpH1SnC2zdADm)
 
-	Or You can run scrapping_tools.py
+	Or You can run `scrapping_tools.py`
 
 2.	Model generator code in colab with edit permission. [Link to model_generator.ipynb!](https://colab.research.google.com/drive/1PJJt6lzVxeGxMv4brBLiElOTP62ILQ8K)
 
@@ -18,7 +18,7 @@ This is a course project for CSE 6240: Web Search and Text Mining, Spring 2020
 3.	Text generator code in colab with edit permission. [Link to text_generator.ipynb!](https://colab.research.google.com/drive/1GrpRP17WUOQlW9WbBuRN0izqqPhd2iYY)
 	Before the running make sure 
 - Make sure select CPU type in colab (Runting->Change Run Type -> None)
-- Make sure upload following file before run, helper.py preprocess.pkl models.py data.pkl trained_GRU_sq_3.pt(this file could be different , and also change "model_name") 
+- Make sure upload following file before run, `helper.py` preprocess.pkl models.py data.pkl trained_GRU_sq_3.pt(this file could be different , and also change "model_name") 
 
 4. Code expalining
 
