@@ -45,7 +45,7 @@ dict = {
 }
 ```
 
-You also can print out
+	You also can print out
 ```
 print(dict.keys())# to see all the keys
 ```
